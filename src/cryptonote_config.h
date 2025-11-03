@@ -180,18 +180,18 @@
 #define HF_VERSION_PER_BYTE_FEE                 2   // Fee optimization
 #define HF_VERSION_SMALLER_BP                   3   // Bulletproof optimization
 #define HF_VERSION_LONG_TERM_BLOCK_WEIGHT       3   // Block weight optimization
-#define HF_VERSION_MIN_2_OUTPUTS                12
-#define HF_VERSION_MIN_V2_COINBASE_TX           12
-#define HF_VERSION_SAME_MIXIN                   12
-#define HF_VERSION_REJECT_SIGS_IN_COINBASE      12
-#define HF_VERSION_ENFORCE_MIN_AGE              12
-#define HF_VERSION_EFFECTIVE_SHORT_TERM_MEDIAN_IN_PENALTY 12
-#define HF_VERSION_EXACT_COINBASE               13
-#define HF_VERSION_CLSAG                        13
-#define HF_VERSION_DETERMINISTIC_UNLOCK_TIME    13
-#define HF_VERSION_BULLETPROOF_PLUS             15
-#define HF_VERSION_VIEW_TAGS                    15
-#define HF_VERSION_2021_SCALING                 15
+#define HF_VERSION_MIN_2_OUTPUTS                2   // Transaction optimization
+#define HF_VERSION_MIN_V2_COINBASE_TX           2   // Coinbase optimization
+#define HF_VERSION_SAME_MIXIN                   3   // Privacy improvement
+#define HF_VERSION_REJECT_SIGS_IN_COINBASE      2   // Security improvement
+#define HF_VERSION_ENFORCE_MIN_AGE              2   // Security
+#define HF_VERSION_EFFECTIVE_SHORT_TERM_MEDIAN_IN_PENALTY 3   // Block weight
+#define HF_VERSION_EXACT_COINBASE               4   // Precise rewards
+#define HF_VERSION_CLSAG                        4   // CLSAG signatures
+#define HF_VERSION_DETERMINISTIC_UNLOCK_TIME    4   // Unlock time
+#define HF_VERSION_BULLETPROOF_PLUS             5   // Latest bulletproofs
+#define HF_VERSION_VIEW_TAGS                    5   // Optimization
+#define HF_VERSION_2021_SCALING                 5   // Latest scaling
 
 #define PER_KB_FEE_QUANTIZATION_DECIMALS        8
 #define CRYPTONOTE_SCALING_2021_FEE_ROUNDING_PLACES 2

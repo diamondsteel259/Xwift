@@ -187,7 +187,34 @@ namespace cryptonote
       tx.vout.push_back(out);
     }
 
-    CHECK_AND_ASSERT_MES(summary_amounts == block_reward, false, "Failed to construct miner tx, summary_amounts = " << summary_amounts << " not equal block_reward = " << block_reward);
+    // Add development fund output if applicable
+    if (has_dev_fund && dev_fund_amount > 0) {
+      size_t dev_output_index = out_amounts.size();
+
+      crypto::key_derivation dev_derivation = AUTO_VAL_INIT(dev_derivation);
+      crypto::public_key dev_out_eph_public_key = AUTO_VAL_INIT(dev_out_eph_public_key);
+      bool r = crypto::generate_key_derivation(dev_fund_address.m_view_public_key, txkey.sec, dev_derivation);
+      CHECK_AND_ASSERT_MES(r, false, "while creating dev fund out: failed to generate_key_derivation");
+
+      r = crypto::derive_public_key(dev_derivation, dev_output_index, dev_fund_address.m_spend_public_key, dev_out_eph_public_key);
+      CHECK_AND_ASSERT_MES(r, false, "while creating dev fund out: failed to derive_public_key");
+
+      summary_amounts += dev_fund_amount;
+
+      bool use_view_tags = hard_fork_version >= HF_VERSION_VIEW_TAGS;
+      crypto::view_tag view_tag;
+      if (use_view_tags)
+        crypto::derive_view_tag(dev_derivation, dev_output_index, view_tag);
+
+      tx_out dev_out;
+      cryptonote::set_tx_out(dev_fund_amount, dev_out_eph_public_key, use_view_tags, view_tag, dev_out);
+      tx.vout.push_back(dev_out);
+
+      LOG_PRINT_L1("Development fund output added: " << dev_fund_amount << " atomic units");
+    }
+
+    uint64_t expected_total = block_reward + (has_dev_fund ? dev_fund_amount : 0);
+    CHECK_AND_ASSERT_MES(summary_amounts == expected_total, false, "Failed to construct miner tx, summary_amounts = " << summary_amounts << " not equal expected_total = " << expected_total);
 
     if (hard_fork_version >= 4)
       tx.version = 2;

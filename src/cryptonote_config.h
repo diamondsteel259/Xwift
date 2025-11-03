@@ -62,9 +62,9 @@
 #define CRYPTONOTE_LONG_TERM_BLOCK_WEIGHT_WINDOW_SIZE   100000 // size in blocks of the long term block weight median window
 #define CRYPTONOTE_SHORT_TERM_BLOCK_WEIGHT_SURGE_FACTOR 50
 #define CRYPTONOTE_COINBASE_BLOB_RESERVED_SIZE          600
-#define CRYPTONOTE_DISPLAY_DECIMAL_POINT                12
+#define CRYPTONOTE_DISPLAY_DECIMAL_POINT                8
 // COIN - number of smallest units in one coin
-#define COIN                                            ((uint64_t)1000000000000) // pow(10, 12)
+#define COIN                                            ((uint64_t)100000000) // pow(10, 8) - 100,000,000 units = 1 XWIFT
 
 #define FEE_PER_KB_OLD                                  ((uint64_t)10000000000) // pow(10, 10)
 #define FEE_PER_KB                                      ((uint64_t)2000000000) // 2 * pow(10, 9)

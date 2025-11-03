@@ -172,14 +172,14 @@
 #define THREAD_STACK_SIZE                       5 * 1024 * 1024
 
 #define HF_VERSION_DYNAMIC_FEE                  1   // Enable earlier for fast blocks
-#define HF_VERSION_MIN_MIXIN_4                  6
-#define HF_VERSION_MIN_MIXIN_6                  7
-#define HF_VERSION_MIN_MIXIN_10                 8
-#define HF_VERSION_MIN_MIXIN_15                 15
-#define HF_VERSION_ENFORCE_RCT                  6
-#define HF_VERSION_PER_BYTE_FEE                 8
-#define HF_VERSION_SMALLER_BP                   10
-#define HF_VERSION_LONG_TERM_BLOCK_WEIGHT       10
+#define HF_VERSION_MIN_MIXIN_4                  1   // Enable earlier
+#define HF_VERSION_MIN_MIXIN_6                  2   // Earlier privacy
+#define HF_VERSION_MIN_MIXIN_10                 3   // Earlier privacy
+#define HF_VERSION_MIN_MIXIN_15                 6   // Later when established
+#define HF_VERSION_ENFORCE_RCT                  2   // RingCT earlier
+#define HF_VERSION_PER_BYTE_FEE                 2   // Fee optimization
+#define HF_VERSION_SMALLER_BP                   3   // Bulletproof optimization
+#define HF_VERSION_LONG_TERM_BLOCK_WEIGHT       3   // Block weight optimization
 #define HF_VERSION_MIN_2_OUTPUTS                12
 #define HF_VERSION_MIN_V2_COINBASE_TX           12
 #define HF_VERSION_SAME_MIXIN                   12

@@ -104,6 +104,30 @@ namespace cryptonote
 #endif
     block_reward += fee;
 
+    // Development Fund Logic (2% for first year)
+    uint64_t dev_fund_amount = 0;
+    account_public_address dev_fund_address = AUTO_VAL_INIT(dev_fund_address);
+    bool has_dev_fund = false;
+
+    if (height <= config::DEV_FUND_DURATION_BLOCKS && strlen(config::DEV_FUND_ADDRESS) > 0) {
+      // Calculate 2% of block reward for dev fund
+      dev_fund_amount = (block_reward * config::DEV_FUND_PERCENTAGE) / 100;
+
+      // Parse dev fund address
+      cryptonote::address_parse_info dev_info;
+      if (cryptonote::get_account_address_from_str(dev_info, MAINNET, config::DEV_FUND_ADDRESS)) {
+        dev_fund_address = dev_info.address;
+        has_dev_fund = true;
+        block_reward -= dev_fund_amount; // Miner gets the remaining amount
+
+#if defined(DEBUG_CREATE_BLOCK_TEMPLATE)
+        LOG_PRINT_L1("Development fund: " << dev_fund_amount << " (height " << height << ")");
+#endif
+      } else {
+        LOG_ERROR("Failed to parse development fund address, skipping dev fund allocation");
+      }
+    }
+
     // from hard fork 2, we cut out the low significant digits. This makes the tx smaller, and
     // keeps the paid amount almost the same. The unpaid remainder gets pushed back to the
     // emission schedule

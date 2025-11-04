@@ -232,9 +232,9 @@ namespace config
   uint64_t const CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 65;
   uint64_t const CRYPTONOTE_PUBLIC_INTEGRATED_ADDRESS_BASE58_PREFIX = 66;
   uint64_t const CRYPTONOTE_PUBLIC_SUBADDRESS_BASE58_PREFIX = 67;
-  uint16_t const P2P_DEFAULT_PORT = 18080;
-  uint16_t const RPC_DEFAULT_PORT = 18081;
-  uint16_t const ZMQ_RPC_DEFAULT_PORT = 18082;
+  uint16_t const P2P_DEFAULT_PORT = 19080;  // Changed from 18080 to avoid Monero conflicts
+  uint16_t const RPC_DEFAULT_PORT = 19081;  // Changed from 18081 to avoid Monero conflicts
+  uint16_t const ZMQ_RPC_DEFAULT_PORT = 19082;  // Changed from 18082 to avoid Monero conflicts
   boost::uuids::uuid const NETWORK_ID = { {
       0x58, 0x57, 0x49, 0x46, 0x54, 0x00, 0x00, 0x00,
       0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01

@@ -96,8 +96,8 @@
 #define BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT          10000  //by default, blocks ids count in synchronizing
 #define BLOCKS_IDS_SYNCHRONIZING_MAX_COUNT              25000  //max blocks ids count in synchronizing
 #define BLOCKS_SYNCHRONIZING_DEFAULT_COUNT_PRE_V4       100    //by default, blocks count in blocks downloading
-#define BLOCKS_SYNCHRONIZING_DEFAULT_COUNT              100     //by default, blocks count in blocks downloading - increased for 30s blocks
-#define BLOCKS_SYNCHRONIZING_MAX_COUNT                  4096   //must be a power of 2, greater than 128, increased for faster sync
+#define BLOCKS_SYNCHRONIZING_DEFAULT_COUNT              200     //optimized for 30s blocks (4× more blocks than Monero)
+#define BLOCKS_SYNCHRONIZING_MAX_COUNT                  8192   //must be a power of 2, optimized for 30s block time
 
 #define CRYPTONOTE_MEMPOOL_TX_LIVETIME                    (86400*3) //seconds, three days
 #define CRYPTONOTE_MEMPOOL_TX_FROM_ALT_BLOCK_LIVETIME     604800 //seconds, one week

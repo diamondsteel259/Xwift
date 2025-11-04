@@ -120,12 +120,18 @@ namespace cryptonote
         has_dev_fund = true;
         block_reward -= dev_fund_amount; // Miner gets the remaining amount
 
-#if defined(DEBUG_CREATE_BLOCK_TEMPLATE)
-        LOG_PRINT_L1("Development fund: " << dev_fund_amount << " (height " << height << ")");
-#endif
+        // Enhanced logging for dev fund allocation
+        uint64_t remaining_blocks = config::DEV_FUND_DURATION_BLOCKS - height;
+        float progress_percent = (float(height) / config::DEV_FUND_DURATION_BLOCKS) * 100.0f;
+        LOG_PRINT_L1("Dev fund allocated: " << dev_fund_amount << " atomic units ("
+                     << (dev_fund_amount / 100000000.0) << " XFT) at height " << height
+                     << " (" << std::fixed << std::setprecision(2) << progress_percent << "% through dev fund period, "
+                     << remaining_blocks << " blocks remaining)");
       } else {
         LOG_ERROR("Failed to parse development fund address, skipping dev fund allocation");
       }
+    } else if (height == config::DEV_FUND_DURATION_BLOCKS + 1) {
+      LOG_PRINT_L0("Development fund period has ended at block " << height);
     }
 
     // from hard fork 2, we cut out the low significant digits. This makes the tx smaller, and

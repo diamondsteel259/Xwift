@@ -242,9 +242,9 @@ Xwift inherits Monero's hardfork system with accelerated timing for 30-second bl
 | Finality (6 conf) | 60 min | 12 min | 3 min |
 | Privacy | Optional | Mandatory | Mandatory |
 | Supply Cap | 21M | Unlimited | Unlimited |
-| Tail Emission | None | 0.6 XMR/block | 9 XWIFT/block |
+| Tail Emission | None | 0.6 XMR/block | 0.9 XWIFT/block |
 | ASIC Resistance | No | Yes (RandomX) | Yes (RandomX) |
-| Year 1 Emission | ~328K BTC | ~262K XMR | ~185B XWIFT |
+| Year 1 Emission | ~328K BTC | ~262K XMR | ~55.5M XWIFT |
 
 ---
 

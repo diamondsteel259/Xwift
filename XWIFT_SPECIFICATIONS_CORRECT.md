@@ -183,16 +183,16 @@ ZMQ_RPC_DEFAULT_PORT = 38082
 ### Block Rewards
 **Standard Block (Year 1 example):**
 ```
-Gross Block Reward: ~110,000 XWIFT
-- Dev Fund (2%): ~2,200 XWIFT → Dev wallet
-- Miner Reward (98%): ~107,800 XWIFT → Miner
+Gross Block Reward: ~38.63 XWIFT
+- Dev Fund (2%): ~0.77 XWIFT → Dev wallet
+- Miner Reward (98%): ~37.86 XWIFT → Miner
 ```
 
 **Tail Emission (Year 10+):**
 ```
-Gross Block Reward: 9 XWIFT
+Gross Block Reward: 0.9 XWIFT
 - Dev Fund: 0 XWIFT (expired after year 1)
-- Miner Reward: 9 XWIFT → Miner
+- Miner Reward: 0.9 XWIFT → Miner
 ```
 
 ### Mining Economics

@@ -135,7 +135,7 @@ This creates isolated containers for both testnet and mainnet with persistent vo
 ### Troubleshooting
 1. Check service status: `systemctl status xwift-*`
 2. View logs: `journalctl -u xwift-* -f`
-3. Verify ports: `netstat -tlnp | grep :18080`
+3. Verify ports: `netstat -tlnp | grep -E ':1908[0-2]|:2908[0-2]'`
 4. Monitor resources: `htop`, `df -h`
 
 ### Recovery

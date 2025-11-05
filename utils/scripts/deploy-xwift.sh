@@ -68,14 +68,14 @@ print_status "Compiling Xwift (this will take 20-60 minutes)..."
 make release -j$(nproc)
 
 # Check if build was successful
-if [ ! -f "build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/monerod" ]; then
-    print_error "Build failed - monerod binary not found"
+if [ ! -f "build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/xwiftd" ]; then
+    print_error "Build failed - xwiftd binary not found"
     exit 1
 fi
 
 # 5. Install binaries
 print_status "Installing binaries..."
-cp build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/monerod /usr/local/bin/
+cp build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/xwiftd /usr/local/bin/
 cp build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/monero-wallet-cli /usr/local/bin/
 
 # 6. Install systemd services

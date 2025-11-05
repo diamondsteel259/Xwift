@@ -37,9 +37,9 @@ COPY --from=builder /src/build/x86_64-linux-gnu/release/bin /usr/local/bin/
 
 # Create xwift user
 RUN adduser --system --group --disabled-password xwift && \
-	mkdir -p /wallet /home/xwift/.xwift && \
-	chown -R xwift:xwift /home/xwift/.xwift && \
-	chown -R xwift:xwift /wallet
+    mkdir -p /wallet /home/xwift/.xwift && \
+    chown -R xwift:xwift /home/xwift/.xwift && \
+    chown -R xwift:xwift /wallet
 
 # Contains the blockchain
 VOLUME /home/xwift/.xwift
@@ -55,5 +55,5 @@ EXPOSE 28081
 # switch to user xwift
 USER xwift
 
-ENTRYPOINT ["monerod"]
+ENTRYPOINT ["xwiftd"]
 CMD ["--testnet", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=28080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=28081", "--non-interactive", "--confirm-external-bind"]

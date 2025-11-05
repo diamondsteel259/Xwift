@@ -54,7 +54,7 @@ BLOCKCHAIN_INFO=$(rpc_call "get_info" "{}")
 
 if [ $? -ne 0 ] || [ -z "$BLOCKCHAIN_INFO" ]; then
     echo -e "${RED}❌ Error: Cannot connect to Xwift daemon on ${RPC_HOST}:${RPC_PORT}${NC}"
-    echo "Please ensure monerod is running and RPC is accessible."
+    echo "Please ensure xwiftd is running and RPC is accessible."
     exit 1
 fi
 

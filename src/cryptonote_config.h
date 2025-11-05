@@ -52,8 +52,8 @@
 
 // MONEY_SUPPLY - total number coins to be generated before tail emission
 #define MONEY_SUPPLY                                    ((uint64_t)(-1)) // Unlimited supply (tail emission continues forever)
-#define EMISSION_SPEED_FACTOR_PER_MINUTE                (20)  // Emission speed - 108.8M will be distributed before tail kicks in
-#define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)1800000000) // 18 XWIFT per minute tail emission baseline
+#define EMISSION_SPEED_FACTOR_PER_MINUTE                (21)  // Emission speed - 108.792M will be distributed before tail kicks in (~8.12 years)
+#define FINAL_SUBSIDY_PER_MINUTE                        ((uint64_t)180000000) // 1.8 XWIFT per minute tail emission (0.9 XWIFT per 30s block)
 
 #define CRYPTONOTE_REWARD_BLOCKS_WINDOW                 100
 #define CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE_V2    60000 //size of block (bytes) after which reward for block calculated using block size

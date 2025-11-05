@@ -49,11 +49,11 @@ VOLUME /home/xwift/.xwift
 # monero-wallet-cli --testnet
 VOLUME /wallet
 
-EXPOSE 28080
-EXPOSE 28081
+EXPOSE 29080
+EXPOSE 29081
 
 # switch to user xwift
 USER xwift
 
 ENTRYPOINT ["xwiftd"]
-CMD ["--testnet", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=28080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=28081", "--non-interactive", "--confirm-external-bind"]
+CMD ["--testnet", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=29080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=29081", "--non-interactive", "--confirm-external-bind"]

@@ -9,8 +9,8 @@ services:
         NPROC: 4
     container_name: xwift-testnet
     ports:
-      - "28080:28080"  # P2P
-      - "28081:28081"  # RPC
+      - "29080:29080"  # P2P
+      - "29081:29081"  # RPC
     volumes:
       - xwift-testnet-data:/home/xwift/.xwift
       - xwift-testnet-wallet:/wallet
@@ -20,7 +20,7 @@ services:
     networks:
       - xwift-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:28081/get_info"]
+      test: ["CMD", "curl", "-f", "http://localhost:29081/get_info"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -34,8 +34,8 @@ services:
         NPROC: 4
     container_name: xwift-mainnet
     ports:
-      - "18080:18080"  # P2P
-      - "18081:18081"  # RPC
+      - "19080:19080"  # P2P
+      - "19081:19081"  # RPC
     volumes:
       - xwift-mainnet-data:/home/xwift/.xwift
       - xwift-mainnet-wallet:/wallet
@@ -45,7 +45,7 @@ services:
     networks:
       - xwift-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:18081/get_info"]
+      test: ["CMD", "curl", "-f", "http://localhost:19081/get_info"]
       interval: 30s
       timeout: 10s
       retries: 3

@@ -34,49 +34,51 @@ Xwift is a privacy-first cryptocurrency fork of Monero, featuring 30-second bloc
 
 ---
 
-## 💰 ECONOMIC MODEL (VERIFIED FROM CODE)
+## 💰 ECONOMIC MODEL (IMPLEMENTED 2025-11-05)
 
 ### Supply Structure
 ```cpp
 // From src/cryptonote_config.h
 #define MONEY_SUPPLY ((uint64_t)(-1))  // Unlimited supply
-#define EMISSION_SPEED_FACTOR_PER_MINUTE (20)
-#define FINAL_SUBSIDY_PER_MINUTE ((uint64_t)1800000000)  // 18 XWIFT per minute
+#define EMISSION_SPEED_FACTOR_PER_MINUTE (21)
+#define FINAL_SUBSIDY_PER_MINUTE ((uint64_t)180000000)  // 1.8 XWIFT per minute
 #define COIN ((uint64_t)100000000)  // 100,000,000 atomic units per XWIFT
 ```
 
 **Key Facts:**
 - **Total Supply:** UNLIMITED (perpetual tail emission)
-- **Pre-Tail Emission:** ~184.5 billion XWIFT over 9.5 years
-- **Tail Emission:** 9 XWIFT per block (perpetual)
-- **Tail Emission Annual:** 9,467,280 XWIFT per year
+- **Pre-Tail Emission:** ~108.792 million XWIFT over ~8.12 years
+- **Initial Block Reward:** ~52.78 XWIFT per block
+- **Tail Emission:** 0.9 XWIFT per block (perpetual)
+- **Tail Emission Annual:** 946,728 XWIFT per year
 
 ### Block Reward Formula
 ```
-Base Reward = (MONEY_SUPPLY - already_generated_coins) >> EMISSION_SPEED_FACTOR
+Base Reward = ((MONEY_SUPPLY - already_generated) * 1.2) >> EMISSION_SPEED_FACTOR
+Base Reward = Base Reward × (block_time / 60)
 
 When Base Reward < Tail Emission:
     Base Reward = FINAL_SUBSIDY_PER_MINUTE ÷ blocks_per_minute
-    Base Reward = 1,800,000,000 ÷ 2 = 900,000,000 atomic units
-    Base Reward = 9 XWIFT per block
+    Base Reward = 180,000,000 ÷ 2 = 90,000,000 atomic units
+    Base Reward = 0.9 XWIFT per block
 ```
 
-### Emission Schedule (CORRECTED)
+### Emission Schedule (Implemented 2025-11-05)
 
 | Timeframe | Block Reward | Daily Emission | Annual Emission | Cumulative Supply |
 |-----------|--------------|----------------|-----------------|-------------------|
-| Genesis (Block 1) | 175,921.86 XWIFT | 506,654,958 XWIFT | 185,055,723,438 XWIFT | 175,922 XWIFT |
-| 6 months | ~125,000 XWIFT | ~360,000,000 XWIFT | ~131B XWIFT | 72.7B XWIFT |
-| 1 year | ~110,000 XWIFT | ~316,800,000 XWIFT | ~115B XWIFT | 116.8B XWIFT |
-| 2 years | ~81,000 XWIFT | ~233,280,000 XWIFT | ~85B XWIFT | 159.6B XWIFT |
-| 5 years | ~41,000 XWIFT | ~118,080,000 XWIFT | ~43B XWIFT | 183.2B XWIFT |
-| 9.5 years | 9 XWIFT | 25,920 XWIFT | 9,467,280 XWIFT | 184.5B XWIFT |
-| 10+ years (Tail) | 9 XWIFT | 25,920 XWIFT | 9,467,280 XWIFT | Growing infinitely |
+| Genesis (Block 1) | 52.78 XWIFT | 152,006 XWIFT | 55,507,354 XWIFT | 52.78 XWIFT |
+| 1 year | ~38.63 XWIFT | ~111,254 XWIFT | ~40,607,683 XWIFT | ~43.06M XWIFT |
+| 2 years | ~28.27 XWIFT | ~81,418 XWIFT | ~29,717,308 XWIFT | ~64.54M XWIFT |
+| 4 years | ~15.13 XWIFT | ~43,574 XWIFT | ~15,904,484 XWIFT | ~90.62M XWIFT |
+| 6 years | ~8.10 XWIFT | ~23,328 XWIFT | ~8,514,634 XWIFT | ~104.10M XWIFT |
+| 8.12 years | **0.9 XWIFT** | **2,592 XWIFT** | **946,728 XWIFT** | **~108.79M XWIFT** |
+| 10+ years (Tail) | **0.9 XWIFT** | **2,592 XWIFT** | **946,728 XWIFT** | Growing infinitely |
 
 **Inflation Rate:**
-- Year 1: ~158% (185B new coins on near-zero base)
-- Year 5: ~23% (43B new on 140B base)
-- Year 10+: ~0.48% (9.47M new on ~2T base, declining perpetually)
+- Year 1: ~129% (55.5M new coins on near-zero base)
+- Year 4: ~17.5% (15.9M new on 90.6M base)
+- Year 10+: ~0.87% (946K new on ~109M base, declining perpetually)
 
 ### Development Fund
 ```cpp
@@ -88,7 +90,7 @@ const char DEV_FUND_ADDRESS[] = "DEVELOPMENT_FUND_ADDRESS_TO_BE_SET";
 **Details:**
 - **Percentage:** 2% of every block reward
 - **Duration:** First year only (1,051,920 blocks)
-- **Est. Year 1 Collection:** ~3.7 billion XWIFT (2% of 185B)
+- **Est. Year 1 Collection:** ~1.11 million XWIFT (2% of 55.5M)
 - **Transparency:** All transactions visible on blockchain
 - **Status:** Address must be set before mainnet launch
 

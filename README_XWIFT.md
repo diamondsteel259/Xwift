@@ -17,14 +17,16 @@ Follow the comprehensive guide in [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
 ## 🌐 Network Configuration
 
 ### Mainnet
-- **P2P Port**: 18080
-- **RPC Port**: 18081
+- **P2P Port**: 19080
+- **RPC Port**: 19081
+- **ZMQ Port**: 19082
 - **Address Prefix**: 65
 - **Network ID**: XWIFT unique identifier
 
 ### Testnet
-- **P2P Port**: 28080
-- **RPC Port**: 28081
+- **P2P Port**: 29080
+- **RPC Port**: 29081
+- **ZMQ Port**: 29082
 - **Address Prefix**: 85
 - **Network ID**: XWIFT testnet identifier
 
@@ -52,22 +54,22 @@ journalctl -u xwift-testnet -f
 ### RPC Access
 ```bash
 # Mainnet info
-curl http://localhost:18081/get_info
+curl http://localhost:19081/get_info
 
 # Testnet info
-curl http://localhost:28081/get_info
+curl http://localhost:29081/get_info
 ```
 
 ## 💼 Wallet Operations
 
 ### Create Testnet Wallet
 ```bash
-monero-wallet-cli --testnet --generate-wallet my-test-wallet
+xwift-wallet-cli --testnet --generate-wallet my-test-wallet
 ```
 
 ### Create Mainnet Wallet
 ```bash
-monero-wallet-cli --generate-wallet my-main-wallet
+xwift-wallet-cli --generate-wallet my-main-wallet
 ```
 
 ## 🔧 Configuration Files
@@ -133,7 +135,7 @@ This creates isolated containers for both testnet and mainnet with persistent vo
 ### Troubleshooting
 1. Check service status: `systemctl status xwift-*`
 2. View logs: `journalctl -u xwift-* -f`
-3. Verify ports: `netstat -tlnp | grep :18080`
+3. Verify ports: `netstat -tlnp | grep -E ':1908[0-2]|:2908[0-2]'`
 4. Monitor resources: `htop`, `df -h`
 
 ### Recovery

@@ -84,6 +84,38 @@ Xwift implements several critical customizations to ensure complete network inde
 3. **Unique Address Prefixes**: Different addressing scheme from Monero
 4. **Custom Genesis Blocks**: Independent blockchain genesis
 5. **Optimized Parameters**: Performance improvements while maintaining security
+6. **Custom Emission Curve**: Tailored block rewards and tail emission for optimal distribution
+
+## Economic Model
+
+### Block Rewards & Emission
+- **Block Time:** 30 seconds (4× faster than Monero)
+- **Initial Block Reward:** ~52.78 XWIFT per block
+- **Tail Emission:** 0.9 XWIFT per block (perpetual)
+- **Base Supply:** ~108.792 million XWIFT emitted over ~8.12 years
+- **Total Supply:** Unlimited (tail emission continues forever)
+
+### Emission Schedule
+
+| Timeframe | Block Reward | Daily Emission | Annual Emission | Cumulative Supply |
+|-----------|--------------|----------------|-----------------|-------------------|
+| Genesis | 52.78 XWIFT | 152,006 XWIFT | 55.5M XWIFT | 52.78 XWIFT |
+| Year 1 | ~38.63 XWIFT | ~111,254 XWIFT | ~40.6M XWIFT | ~43.06M XWIFT |
+| Year 2 | ~28.27 XWIFT | ~81,418 XWIFT | ~29.7M XWIFT | ~64.54M XWIFT |
+| Year 4 | ~15.13 XWIFT | ~43,574 XWIFT | ~15.9M XWIFT | ~90.62M XWIFT |
+| Year 8.12 | **0.9 XWIFT** | **2,592 XWIFT** | **946,728 XWIFT** | **~108.79M XWIFT** |
+| Year 10+ | **0.9 XWIFT** | **2,592 XWIFT** | **946,728 XWIFT** | Growing infinitely |
+
+### Why Tail Emission?
+- **Long-term Security:** Perpetual miner rewards ensure network security even as transaction fees fluctuate
+- **Lost Coin Protection:** Compensates for coins lost to forgotten keys or accidents
+- **Stable Inflation:** ~0.87% annual inflation declining perpetually, preventing deflation spiral
+
+### Development Fund
+- **Amount:** 2% of block rewards
+- **Duration:** First year only (~1.11 million XWIFT)
+- **Purpose:** Protocol development, security audits, and ecosystem growth
+- **Transparency:** All transactions visible on blockchain
 
 ## Documentation
 

@@ -83,7 +83,12 @@ namespace cryptonote {
   bool get_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, uint64_t &reward, uint8_t version) {
     // Static assert removed - Xwift uses 15s (V1) and 30s (V2) block times which are valid
     const uint64_t target_seconds = version < 2 ? DIFFICULTY_TARGET_V1 : DIFFICULTY_TARGET_V2;
-    uint64_t base_reward = (MONEY_SUPPLY - already_generated_coins) >> EMISSION_SPEED_FACTOR_PER_MINUTE;
+
+    // Use __uint128_t to prevent overflow and apply 1.2x scaling factor to achieve 52.78 XWIFT initial reward
+    __uint128_t base_reward_128 = ((__uint128_t)(MONEY_SUPPLY - already_generated_coins) * 12) / 10;
+    base_reward_128 = base_reward_128 >> EMISSION_SPEED_FACTOR_PER_MINUTE;
+    uint64_t base_reward = (uint64_t)(base_reward_128);
+
     base_reward = base_reward * target_seconds / 60;
     const uint64_t final_subsidy = FINAL_SUBSIDY_PER_MINUTE * target_seconds / 60;
     if (base_reward < final_subsidy)

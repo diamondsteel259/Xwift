@@ -296,8 +296,8 @@ Xwift inherits Monero's hardfork system with accelerated timing for 30-second bl
 ## ✅ VERIFICATION CHECKLIST
 
 - [x] Block time: 30 seconds (VERIFIED)
-- [x] Emission formula: (SUPPLY - mined) >> 20 (VERIFIED)
-- [x] Tail emission: 9 XWIFT/block (VERIFIED)
+- [x] Emission formula: ((SUPPLY - mined) * 1.2) >> 21 (VERIFIED 2025-11-05)
+- [x] Tail emission: 0.9 XWIFT/block (VERIFIED 2025-11-05)
 - [x] Network ports: 19xxx/29xxx (VERIFIED)
 - [x] Network IDs: XWIFT-specific (VERIFIED)
 - [x] Address prefixes: 65/66/67 mainnet (VERIFIED)
@@ -311,12 +311,12 @@ Xwift inherits Monero's hardfork system with accelerated timing for 30-second bl
 ## 📊 EMISSION CURVE SUMMARY
 
 ```
-Initial Emission (Year 1): ~185 billion XWIFT
-Supply after 5 years: ~183 billion XWIFT
-Supply after 9.5 years: ~184.5 billion XWIFT
-Perpetual Tail Emission: +9.47 million XWIFT per year
+Initial Emission (Year 1): ~55.5 million XWIFT
+Supply after 4 years: ~90.6 million XWIFT
+Supply after 8.12 years: ~108.79 million XWIFT
+Perpetual Tail Emission: +946,728 XWIFT per year
 
-Long-term inflation: ~0.48% and declining perpetually
+Long-term inflation: ~0.87% and declining perpetually
 ```
 
 ---

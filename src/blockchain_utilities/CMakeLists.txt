@@ -307,7 +307,7 @@ target_link_libraries(blockchain_prune_known_spent_data
 
 set_property(TARGET blockchain_prune_known_spent_data
 	PROPERTY
-	OUTPUT_NAME "monero-blockchain-prune-known-spent-data")
+	OUTPUT_NAME "xwift-blockchain-prune-known-spent-data")
 install(TARGETS blockchain_prune_known_spent_data DESTINATION bin)
 
 monero_add_executable(blockchain_prune

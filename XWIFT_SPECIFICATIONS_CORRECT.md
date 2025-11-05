@@ -258,12 +258,13 @@ Xwift inherits Monero's hardfork system with accelerated timing for 30-second bl
 5. **✅ Public announcement (2 weeks minimum)**
 
 ### Economic Considerations
-⚠️ **High Initial Emission:** Year 1 will emit ~185 billion XWIFT, which is a VERY high inflation rate. This is by design for:
+⚠️ **Initial Emission:** Year 1 will emit ~55.5 million XWIFT. This is by design for:
 - Fast network bootstrap
 - Widespread initial distribution
 - Miner incentive during launch phase
+- Smooth transition to tail emission over 8 years
 
-⚠️ **Unlimited Supply:** Unlike Bitcoin's 21M cap, Xwift has perpetual tail emission of 9 XWIFT/block. This ensures:
+⚠️ **Unlimited Supply:** Unlike Bitcoin's 21M cap, Xwift has perpetual tail emission of 0.9 XWIFT/block. This ensures:
 - Long-term miner security incentive
 - Protection against lost coins
 - Sustainable network security funding

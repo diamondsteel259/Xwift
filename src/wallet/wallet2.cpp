@@ -112,9 +112,9 @@ using namespace cryptonote;
 // used to target a given block weight (additional outputs may be added on top to build fee)
 #define TX_WEIGHT_TARGET(bytes) (bytes*2/3)
 
-#define UNSIGNED_TX_PREFIX "Monero unsigned tx set\005"
-#define SIGNED_TX_PREFIX "Monero signed tx set\005"
-#define MULTISIG_UNSIGNED_TX_PREFIX "Monero multisig unsigned tx set\001"
+#define UNSIGNED_TX_PREFIX "Xwift unsigned tx set\005"
+#define SIGNED_TX_PREFIX "Xwift signed tx set\005"
+#define MULTISIG_UNSIGNED_TX_PREFIX "Xwift multisig unsigned tx set\001"
 
 #define RECENT_OUTPUT_RATIO (0.5) // 50% of outputs are from the recent zone
 #define RECENT_OUTPUT_DAYS (1.8) // last 1.8 day makes up the recent zone (taken from monerolink.pdf, Miller et al)
@@ -128,11 +128,11 @@ using namespace cryptonote;
 #define SUBADDRESS_LOOKAHEAD_MAJOR 50
 #define SUBADDRESS_LOOKAHEAD_MINOR 200
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "Monero key image export\003"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "Xwift key image export\003"
 
-#define MULTISIG_EXPORT_FILE_MAGIC "Monero multisig export\001"
+#define MULTISIG_EXPORT_FILE_MAGIC "Xwift multisig export\001"
 
-#define OUTPUT_EXPORT_FILE_MAGIC "Monero output export\004"
+#define OUTPUT_EXPORT_FILE_MAGIC "Xwift output export\004"
 
 #define SEGREGATION_FORK_HEIGHT 99999999
 #define TESTNET_SEGREGATION_FORK_HEIGHT 99999999
@@ -156,7 +156,7 @@ using namespace cryptonote;
 
 static const std::string MULTISIG_SIGNATURE_MAGIC = "SigMultisigPkV1";
 
-static const std::string ASCII_OUTPUT_MAGIC = "MoneroAsciiDataV1";
+static const std::string ASCII_OUTPUT_MAGIC = "XwiftAsciiDataV1";
 
 static const std::string BACKGROUND_WALLET_SUFFIX = ".background";
 

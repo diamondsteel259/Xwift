@@ -111,6 +111,28 @@ This Xwift implementation includes critical customizations to ensure network ind
 - **Unique Address Prefixes**: Different from Monero's addressing scheme
 - **Custom Genesis Blocks**: Independent blockchain genesis
 - **Network IDs**: Unique 16-byte network identifiers
+- **Custom Emission Curve**: Optimized block rewards (see Economic Model below)
+
+## 💰 Economic Model
+
+### Block Specifications
+- **Block Time**: 30 seconds (4× faster than Monero's 120s)
+- **Blocks per Day**: 2,880 blocks
+- **Blocks per Year**: 1,051,920 blocks
+
+### Emission Schedule
+- **Initial Block Reward**: ~52.78 XWIFT per block
+- **Tail Emission**: 0.9 XWIFT per block (perpetual, begins after ~8.12 years)
+- **Base Supply**: ~108.792 million XWIFT emitted before tail emission
+- **Total Supply**: Unlimited (perpetual tail emission ensures long-term security)
+
+### Key Economic Features
+- **Smooth Decay**: Block rewards gradually decrease using Monero-style emission curve
+- **Tail Emission**: Perpetual 0.9 XWIFT per block (~946,728 XWIFT per year)
+- **Long-term Inflation**: ~0.87% declining perpetually after tail emission begins
+- **Development Fund**: 2% of block rewards for first year only
+
+For detailed emission specifications, see [XWIFT_SPECIFICATIONS_CORRECT.md](XWIFT_SPECIFICATIONS_CORRECT.md)
 
 ## 🐳 Docker Deployment
 

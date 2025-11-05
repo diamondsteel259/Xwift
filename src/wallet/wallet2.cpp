@@ -128,11 +128,11 @@ using namespace cryptonote;
 #define SUBADDRESS_LOOKAHEAD_MAJOR 50
 #define SUBADDRESS_LOOKAHEAD_MINOR 200
 
-#define KEY_IMAGE_EXPORT_FILE_MAGIC "Monero key image export\003"
+#define KEY_IMAGE_EXPORT_FILE_MAGIC "Xwift key image export\003"
 
-#define MULTISIG_EXPORT_FILE_MAGIC "Monero multisig export\001"
+#define MULTISIG_EXPORT_FILE_MAGIC "Xwift multisig export\001"
 
-#define OUTPUT_EXPORT_FILE_MAGIC "Monero output export\004"
+#define OUTPUT_EXPORT_FILE_MAGIC "Xwift output export\004"
 
 #define SEGREGATION_FORK_HEIGHT 99999999
 #define TESTNET_SEGREGATION_FORK_HEIGHT 99999999

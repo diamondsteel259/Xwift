@@ -285,7 +285,7 @@ target_link_libraries(blockchain_stats
 
 set_property(TARGET blockchain_stats
 	PROPERTY
-	OUTPUT_NAME "monero-blockchain-stats")
+	OUTPUT_NAME "xwift-blockchain-stats")
 install(TARGETS blockchain_stats DESTINATION bin)
 
 monero_add_executable(blockchain_prune_known_spent_data

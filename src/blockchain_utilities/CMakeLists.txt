@@ -264,7 +264,7 @@ target_link_libraries(blockchain_depth
 
 set_property(TARGET blockchain_depth
 	PROPERTY
-	OUTPUT_NAME "monero-blockchain-depth")
+	OUTPUT_NAME "xwift-blockchain-depth")
 install(TARGETS blockchain_depth DESTINATION bin)
 
 monero_add_executable(blockchain_stats

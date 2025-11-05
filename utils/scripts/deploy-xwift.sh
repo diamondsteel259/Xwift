@@ -35,6 +35,17 @@ fi
 
 print_status "Starting Xwift deployment..."
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+REPO_DIR=$(cd "$SCRIPT_DIR/../.." && pwd)
+print_status "Using repository at $REPO_DIR"
+
+# Allow git commands under sudo/root when repository is owned by another user
+if command -v git >/dev/null 2>&1; then
+    git config --global --add safe.directory "$REPO_DIR" >/dev/null 2>&1 || true
+fi
+
+cd "$REPO_DIR"
+
 # 1. Install dependencies
 print_status "Installing system dependencies..."
 apt update && apt install -y \
@@ -57,7 +68,6 @@ chown -R xwift:xwift /var/lib/xwift-* /var/log/xwift-*
 
 # 4. Build Xwift
 print_status "Building Xwift from source..."
-cd /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift
 
 # Initialize submodules
 print_status "Initializing git submodules..."
@@ -67,16 +77,25 @@ git submodule init && git submodule update
 print_status "Compiling Xwift (this will take 20-60 minutes)..."
 make release -j$(nproc)
 
+BUILD_OS=$(uname | sed 's|[:/\\ \(\)]|_|g')
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "master")
+SANITIZED_BRANCH=$(echo "$CURRENT_BRANCH" | sed 's|[:/\\ \(\)]|_|g')
+BUILD_ROOT="build/${BUILD_OS}/${SANITIZED_BRANCH}/release"
+if [ ! -d "$BUILD_ROOT/bin" ]; then
+    BUILD_ROOT="build/release"
+fi
+BUILD_BIN="${BUILD_ROOT}/bin"
+
 # Check if build was successful
-if [ ! -f "build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/xwiftd" ]; then
-    print_error "Build failed - xwiftd binary not found"
+if [ ! -f "$BUILD_BIN/xwiftd" ]; then
+    print_error "Build failed - xwiftd binary not found in $BUILD_BIN"
     exit 1
 fi
 
 # 5. Install binaries
 print_status "Installing binaries..."
-cp build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/xwiftd /usr/local/bin/
-cp build/Linux/compyle_xwift-deploy-testnet-mainnet/release/bin/monero-wallet-cli /usr/local/bin/
+cp "$BUILD_BIN/xwiftd" /usr/local/bin/
+cp "$BUILD_BIN/monero-wallet-cli" /usr/local/bin/
 
 # 6. Install systemd services
 print_status "Installing systemd services..."
@@ -94,10 +113,10 @@ print_status "Configuring firewall..."
 ufw allow ssh || true
 
 # Allow Xwift ports
-ufw allow 18080/tcp comment "Xwift Mainnet P2P"
-ufw allow 18081/tcp comment "Xwift Mainnet RPC"
-ufw allow 28080/tcp comment "Xwift Testnet P2P"
-ufw allow 28081/tcp comment "Xwift Testnet RPC"
+ufw allow 19080/tcp comment "Xwift Mainnet P2P"
+ufw allow 19081/tcp comment "Xwift Mainnet RPC"
+ufw allow 29080/tcp comment "Xwift Testnet P2P"
+ufw allow 29081/tcp comment "Xwift Testnet RPC"
 
 # Enable firewall if not already enabled
 ufw --force enable || true
@@ -129,13 +148,13 @@ print_status "Performing final verification..."
 sleep 5
 
 # Check if RPC ports are responding
-if curl -s http://localhost:18081/get_info > /dev/null 2>&1; then
+if curl -s http://localhost:19081/get_info > /dev/null 2>&1; then
     print_status "✅ Mainnet RPC is responding"
 else
     print_warning "⚠️  Mainnet RPC not responding yet (may still be starting)"
 fi
 
-if curl -s http://localhost:28081/get_info > /dev/null 2>&1; then
+if curl -s http://localhost:29081/get_info > /dev/null 2>&1; then
     print_status "✅ Testnet RPC is responding"
 else
     print_warning "⚠️  Testnet RPC not responding yet (may still be starting)"
@@ -158,10 +177,10 @@ echo "   - View logs: journalctl -u xwift-mainnet -f"
 echo "   - Start/stop: systemctl start/stop xwift-mainnet"
 echo ""
 echo "🌐 Network Information:"
-echo "   - Mainnet RPC: http://localhost:18081"
-echo "   - Testnet RPC: http://localhost:28081"
-echo "   - Mainnet P2P: 18080"
-echo "   - Testnet P2P: 28080"
+echo "   - Mainnet RPC: http://localhost:19081"
+echo "   - Testnet RPC: http://localhost:29081"
+echo "   - Mainnet P2P: 19080"
+echo "   - Testnet P2P: 29080"
 echo ""
 echo "🎯 Next Steps:"
 echo "   1. Create wallets using monero-wallet-cli"

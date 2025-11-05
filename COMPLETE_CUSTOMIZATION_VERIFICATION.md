@@ -36,14 +36,14 @@ Based on thorough code review, **your Xwift blockchain IS fully customized and r
 
 ### Ports (Proper)
 **Mainnet:**
-- ✅ P2P: 18080
-- ✅ RPC: 18081
-- ✅ ZMQ: 18082
+- ✅ P2P: 19080
+- ✅ RPC: 19081
+- ✅ ZMQ: 19082
 
 **Testnet:**
-- ✅ P2P: 28080
-- ✅ RPC: 28081
-- ✅ ZMQ: 28082
+- ✅ P2P: 29080
+- ✅ RPC: 29081
+- ✅ ZMQ: 29082
 
 ---
 
@@ -55,19 +55,19 @@ Based on thorough code review, **your Xwift blockchain IS fully customized and r
 - ✅ **4x faster than Monero!**
 
 ### Total Supply (CUSTOMIZED)
-- ✅ **108.8M XWIFT total** (line 54: `MONEY_SUPPLY = 10880000000000000`)
-- ⚠️ Original Monero: Unlimited supply
-- ✅ **Capped supply, unlike Monero!**
+- ✅ **~108.8M XWIFT distributed before tail emission** (line 54: `MONEY_SUPPLY = ((uint64_t)(-1))`)
+- ⚠️ Original Monero: ~18.4M XMR before tail emission
+- ✅ **Unlimited tail emission maintained for long-term incentives**
 
 ### Emission Schedule (CUSTOMIZED)
-- ✅ **Emission factor: 8 per minute** (line 55: `EMISSION_SPEED_FACTOR_PER_MINUTE = 8`)
-- ⚠️ Original Monero: 20 per minute
-- ✅ **Slower, fairer distribution than Monero!**
+- ✅ **Emission factor: 20 per minute** (line 55: `EMISSION_SPEED_FACTOR_PER_MINUTE = 20`)
+- ⚠️ Original Monero: 20 per minute with 120-second blocks
+- ✅ **Faster block cadence with proportional emission for fairness**
 
 ### Tail Emission (CUSTOMIZED)
-- ✅ **9 XWIFT per block × 2 blocks/min** (line 56: `FINAL_SUBSIDY_PER_MINUTE = 1800000000000`)
-- ⚠️ Original Monero: 0.6 XMR per minute
-- ✅ **0.5 XWIFT per block perpetual tail emission**
+- ✅ **9 XWIFT per block (18 XWIFT/min)** (line 56: `FINAL_SUBSIDY_PER_MINUTE = 1800000000`)
+- ⚠️ Original Monero: 0.6 XMR every 2 minutes
+- ✅ **Consistent long-term security budget**
 
 ### Decimal Places (CUSTOMIZED)
 - ✅ **8 decimal places** (line 65: `CRYPTONOTE_DISPLAY_DECIMAL_POINT = 8`)
@@ -160,12 +160,12 @@ You may want to setup seed nodes for better initial network connectivity.
 | Feature | Xwift | Monero | Advantage |
 |---------|-------|---------|-----------|
 | **Block Time** | 30 seconds | 120 seconds | **4x faster** ✅ |
-| **Total Supply** | 108.8M capped | Unlimited | **Scarcity** ✅ |
+| **Pre-tail Supply** | ~108.8M XFT before tail (unlimited tail) | ~18.4M XMR before tail (unlimited tail) | **Larger initial distribution** ✅ |
 | **Confirmation Time** | 3 minutes | 20 minutes | **6.7x faster** ✅ |
-| **Decimal Places** | 8 | 12 | **Simpler** ✅ |
-| **Emission Speed** | Slower (8) | Faster (20) | **Fairer** ✅ |
-| **Tail Emission** | 0.5 per block | 0.6/min | **Similar** ≈ |
-| **Dev Fund** | Yes (2%, 1 year) | No | **Sustainable** ✅ |
+| **Decimal Places** | 8 | 12 | **Simpler units** ✅ |
+| **Emission Factor** | 20/min at 30s blocks | 20/min at 120s blocks | **Comparable rate with faster cadence** ✅ |
+| **Tail Emission** | 9 XFT/block (18 XFT/min) | 0.6 XMR/2 min | **Higher ongoing rewards** ✅ |
+| **Dev Fund** | Yes (2%, 1 year) | No | **Sustainable funding** ✅ |
 | **Privacy** | Full (RingCT) | Full (RingCT) | **Equal** ≈ |
 | **Network ID** | Unique XWIFT | Unique Monero | **Separate** ✅ |
 | **Address Prefix** | X... | 4... | **Distinct** ✅ |
@@ -178,11 +178,11 @@ You may want to setup seed nodes for better initial network connectivity.
 
 1. **Speed** - 4x faster blocks (30s vs 120s)
 2. **Fast Confirmations** - 3 min vs 20 min
-3. **Capped Supply** - 108.8M vs unlimited
+3. **Expanded Pre-tail Distribution** - ~108.8M XFT before tail vs ~18.4M XMR
 4. **Development Fund** - 2% for 1 year (Monero has none)
 5. **User-Friendly Units** - 8 decimals vs 12
 6. **Fast Retargeting** - 4 min vs longer
-7. **Fair Distribution** - Slower emission curve
+7. **Enhanced Tail Emission** - 9 XFT per block for ongoing security
 8. **Sustainable Funding** - Built-in development support
 
 ---

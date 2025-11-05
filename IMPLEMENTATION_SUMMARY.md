@@ -40,10 +40,10 @@ if (get_account_address_from_str(dev_info, MAINNET, config::DEV_FUND_ADDRESS)) {
 
 **Configured Parameters:**
 - **Block Time**: 30 seconds (DIFFICULTY_TARGET_V2 = 30)
-- **Supply**: 108.8M XWIFT (MONEY_SUPPLY = 10880000000000000)
+- **Supply**: Unlimited with tail emission after ~108.8M XFT distributed (MONEY_SUPPLY = -1)
 - **Decimal Places**: 8 (COIN = 100000000)
-- **Tail Emission**: 0.5 XWIFT per block (FINAL_SUBSIDY_PER_MINUTE = 1800000000000)
-- **Emission Speed**: 8 per minute (EMISSION_SPEED_FACTOR_PER_MINUTE = 8)
+- **Tail Emission**: 9 XWIFT per block (FINAL_SUBSIDY_PER_MINUTE = 1,800,000,000 atomic units)
+- **Emission Speed**: 20 per minute emission factor (EMISSION_SPEED_FACTOR_PER_MINUTE = 20)
 
 **Development Fund Constants:**
 ```cpp
@@ -61,13 +61,13 @@ const char DEV_FUND_ADDRESS[] = "DEVELOPMENT_FUND_ADDRESS_TO_BE_SET";
 - **Address Prefix**: 65 (standard), 66 (integrated), 67 (subaddress)
 - **Network ID**: `58 57 49 46 54 00 00 00 00 00 00 00 00 00 00 01` (XWIFT)
 - **Genesis Nonce**: 10003
-- **Ports**: 18080 (P2P), 18081 (RPC), 18082 (ZMQ)
+- **Ports**: 19080 (P2P), 19081 (RPC), 19082 (ZMQ)
 
 **Testnet Configuration:**
 - **Address Prefix**: 85 (standard), 86 (integrated), 87 (subaddress)
 - **Network ID**: `58 57 49 46 54 00 00 00 00 00 00 00 00 00 00 02` (XWIFT testnet)
 - **Genesis Nonce**: 10004
-- **Ports**: 28080 (P2P), 28081 (RPC), 28082 (ZMQ)
+- **Ports**: 29080 (P2P), 29081 (RPC), 29082 (ZMQ)
 
 ### 4. Documentation ✅
 
@@ -205,11 +205,14 @@ make release -j$(nproc)
 ### Option 1: Automated Deployment (Recommended)
 
 ```bash
-# Make script executable
-chmod +x /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift/utils/scripts/deploy-xwift.sh
+# From the repository root
+git pull origin master
+
+# Make the deployment script executable
+chmod +x utils/scripts/deploy-xwift.sh
 
 # Run deployment (requires sudo)
-sudo /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift/utils/scripts/deploy-xwift.sh
+sudo utils/scripts/deploy-xwift.sh
 ```
 
 ### Option 2: Manual Deployment
@@ -222,13 +225,18 @@ sudo apt update && sudo apt install -y build-essential cmake pkg-config \
     gperf python3 ccache libboost-all-dev zlib1g-dev
 
 # 2. Build Xwift
-cd /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift
+cd /path/to/xwift
+git pull origin master
 git submodule init && git submodule update
 make release -j$(nproc)
 
-# 3. Install binaries
-sudo cp build/release/bin/monerod /usr/local/bin/
-sudo cp build/release/bin/monero-wallet-cli /usr/local/bin/
+# 3. Install binaries (update BIN_DIR if your build layout differs)
+BUILD_OS=$(uname | sed 's|[:/\\ \(\)]|_|g')
+BUILD_BRANCH=$(git rev-parse --abbrev-ref HEAD | sed 's|[:/\\ \(\)]|_|g')
+BIN_DIR="build/${BUILD_OS}/${BUILD_BRANCH}/release/bin"
+[ -d "$BIN_DIR" ] || BIN_DIR="build/release/bin"
+sudo cp "$BIN_DIR/xwiftd" /usr/local/bin/
+sudo cp "$BIN_DIR/monero-wallet-cli" /usr/local/bin/
 
 # 4. Create system user
 sudo adduser --system --group --disabled-password xwift
@@ -245,8 +253,8 @@ sudo systemctl enable --now xwift-testnet xwift-mainnet
 # 6. Verify deployment
 systemctl status xwift-testnet
 systemctl status xwift-mainnet
-curl http://localhost:18081/get_info
-curl http://localhost:28081/get_info
+curl http://localhost:19081/get_info
+curl http://localhost:29081/get_info
 ```
 
 ## Monitoring
@@ -268,7 +276,7 @@ journalctl -u xwift-testnet -f
 ### Manual RPC Queries
 ```bash
 # Get blockchain info
-curl -s http://localhost:18081/get_info | jq
+curl -s http://localhost:19081/get_info | jq
 
 # Get dev fund balance (after setting address)
 ./monero-wallet-cli --wallet-file dev-fund-wallet --command balance
@@ -296,8 +304,8 @@ curl -s http://localhost:18081/get_info | jq
 
 - **Dev fund**: Automatically terminates at block 1,051,201
 - **Miner reward**: Returns to 100% of block reward
-- **Tail emission**: 0.5 XWIFT per block perpetually
-- **Long-term inflation**: ~0.48% annually
+- **Tail emission**: 9 XWIFT per block perpetually
+- **Long-term inflation**: ~0.87% annually (decreases over time)
 
 ## Implementation Quality
 

@@ -228,7 +228,7 @@ Last Updated: 2025-01-03
 
 **Source Code:**
 - **Repository:** `github.com/xwift/xwift` (replace with your actual URL)
-- **Branch:** `compyle/xwift-deploy-testnet-mainnet`
+- **Branch:** `master`
 - **Core Config:** `src/cryptonote_config.h` - Blockchain parameters
 - **Dev Fund Logic:** `src/cryptonote_core/cryptonote_tx_utils.cpp` - Allocation implementation
 
@@ -329,7 +329,7 @@ Last Updated: 2025-01-03
 ### Version Control
 
 All documentation is version-controlled on GitHub:
-- Branch: `compyle/xwift-deploy-testnet-mainnet`
+- Branch: `master`
 - See git history for changes
 - Issues and PRs welcome
 

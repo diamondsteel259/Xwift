@@ -16,7 +16,7 @@ All requested features and customizations have been successfully implemented and
 // Core Economic Model (src/cryptonote_config.h)
 #define MONEY_SUPPLY                    ((uint64_t)(-1))      // ✅ Unlimited supply
 #define EMISSION_SPEED_FACTOR_PER_MINUTE (20)                // ✅ 108.8M pre-tail distribution
-#define FINAL_SUBSIDY_PER_MINUTE        ((uint64_t)1800000000000)  // ✅ 9 XFT per block tail
+#define FINAL_SUBSIDY_PER_MINUTE        ((uint64_t)1800000000)   // ✅ 9 XFT per block tail
 #define DIFFICULTY_TARGET_V2            30                   // ✅ 30-second blocks
 #define DIFFICULTY_WINDOW               8                    // ✅ 4-minute retarget (8 × 30s)
 #define CRYPTONOTE_DISPLAY_DECIMAL_POINT 8                   // ✅ 8 decimals
@@ -179,8 +179,8 @@ CRYPTONOTE_NAME = "xwift"                           // ✅ Unique name
 CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 65        // ✅ Unique addresses (start with X)
 NETWORK_ID = {0x58, 0x57, 0x49, 0x46, 0x54, ...}   // ✅ "XWIFT" identifier
 GENESIS_NONCE = 10003                               // ✅ Unique genesis
-P2P_DEFAULT_PORT = 18080                            // ✅ Standard P2P
-RPC_DEFAULT_PORT = 18081                            // ✅ Standard RPC
+P2P_DEFAULT_PORT = 19080                            // ✅ Default P2P
+RPC_DEFAULT_PORT = 19081                            // ✅ Default RPC
 ```
 
 ### Testnet Configuration ✅
@@ -190,8 +190,8 @@ RPC_DEFAULT_PORT = 18081                            // ✅ Standard RPC
 CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 85        // ✅ Testnet addresses
 NETWORK_ID = {0x58, 0x57, 0x49, 0x46, 0x54, ..., 0x02}  // ✅ "XWIFT testnet"
 GENESIS_NONCE = 10004                               // ✅ Unique testnet genesis
-P2P_DEFAULT_PORT = 28080                            // ✅ Testnet P2P
-RPC_DEFAULT_PORT = 28081                            // ✅ Testnet RPC
+P2P_DEFAULT_PORT = 29080                            // ✅ Testnet P2P
+RPC_DEFAULT_PORT = 29081                            // ✅ Testnet RPC
 ```
 
 **Result:** Xwift will NOT connect to Monero network. Completely isolated blockchain. ✅
@@ -288,7 +288,7 @@ bash utils/scripts/dev-fund-monitor.sh
 **2. Configuration Files**
 - `utils/conf/xwift-testnet.conf` - Testnet daemon config
 - `utils/conf/xwift-mainnet.conf` - Mainnet daemon config
-- Port bindings (18080/18081 mainnet, 28080/28081 testnet)
+- Port bindings (19080/19081 mainnet, 29080/29081 testnet)
 - Data directory separation
 
 ---
@@ -381,11 +381,11 @@ bash utils/scripts/dev-fund-monitor.sh
 **Required Action:**
 ```bash
 # Generate mainnet wallet
-cd /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift
-./build/release/bin/monero-wallet-cli --generate-new-wallet dev-fund-mainnet
+cd /path/to/xwift
+./build/$(uname | sed 's|[:/\\ \(\)]|_|g')/$(git rev-parse --abbrev-ref HEAD | sed 's|[:/\\ \(\)]|_|g')/release/bin/monero-wallet-cli --generate-new-wallet dev-fund-mainnet
 
 # Generate testnet wallet for testing
-./build/release/bin/monero-wallet-cli --testnet --generate-new-wallet dev-fund-testnet
+./build/$(uname | sed 's|[:/\\ \(\)]|_|g')/$(git rev-parse --abbrev-ref HEAD | sed 's|[:/\\ \(\)]|_|g')/release/bin/monero-wallet-cli --testnet --generate-new-wallet dev-fund-testnet
 ```
 
 **Update Config:**
@@ -400,7 +400,7 @@ const char DEV_FUND_ADDRESS[] = "YOUR_ACTUAL_XWIFT_MAINNET_ADDRESS_HERE";
 
 **Rebuild After Setting:**
 ```bash
-cd /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift
+cd /path/to/xwift
 make clean
 make release -j$(nproc)
 ```
@@ -422,13 +422,13 @@ make release -j$(nproc)
 **Testing Commands:**
 ```bash
 # Start testnet
-./build/release/bin/monerod --testnet --start-mining YOUR_TEST_ADDRESS
+./build/$(uname | sed 's|[:/\\ \(\)]|_|g')/$(git rev-parse --abbrev-ref HEAD | sed 's|[:/\\ \(\)]|_|g')/release/bin/xwiftd --testnet --start-mining YOUR_TEST_ADDRESS
 
 # Check dev fund balance
-./build/release/bin/monero-wallet-cli --testnet --wallet-file dev-fund-testnet
+./build/$(uname | sed 's|[:/\\ \(\)]|_|g')/$(git rev-parse --abbrev-ref HEAD | sed 's|[:/\\ \(\)]|_|g')/release/bin/monero-wallet-cli --testnet --wallet-file dev-fund-testnet
 
 # Monitor sync status
-curl http://localhost:28081/get_info | jq
+curl http://localhost:29081/get_info | jq
 ```
 
 ### 3. Security Audit (RECOMMENDED)
@@ -463,21 +463,21 @@ curl http://localhost:28081/get_info | jq
 ### Option 1: Automated Deployment (Recommended)
 
 ```bash
-# Clone repository (if not already done)
-cd /workspace/cmhjf7k0r00yxpsimrm8kylyb/Xwift
+# From the repository root
+git pull origin master
 
 # Make script executable
 chmod +x utils/scripts/deploy-xwift.sh
 
 # Run automated deployment (requires sudo)
-sudo ./utils/scripts/deploy-xwift.sh
+sudo utils/scripts/deploy-xwift.sh
 
 # The script will:
 # - Install all dependencies
 # - Build Xwift from source
 # - Create system user and directories
 # - Install systemd services
-# - Configure firewall
+# - Configure firewall (ports 19080/19081 mainnet, 29080/29081 testnet)
 # - Start both testnet and mainnet nodes
 ```
 
